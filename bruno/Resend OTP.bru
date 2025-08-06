@@ -1,0 +1,23 @@
+meta {
+  name: Resend OTP
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{app_url}}/api/resend-otp
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+}
+
+body:multipart-form {
+  email: test@test.test
+}
+
+settings {
+  encodeUrl: true
+}

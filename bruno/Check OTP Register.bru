@@ -1,0 +1,23 @@
+meta {
+  name: Check OTP Register
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{app_url}}/api/register
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+}
+
+body:multipart-form {
+  email: yogadharmaputra2006@gmail.com
+}
+
+settings {
+  encodeUrl: true
+}
