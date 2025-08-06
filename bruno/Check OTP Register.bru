@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{app_url}}/api/register
+  url: {{app_url}}/api/check-otp-register
   body: multipartForm
   auth: inherit
 }
@@ -15,7 +15,8 @@ headers {
 }
 
 body:multipart-form {
-  email: yogadharmaputra2006@gmail.com
+  email: contoh@contoh.contoh
+  otp: 689058
 }
 
 settings {

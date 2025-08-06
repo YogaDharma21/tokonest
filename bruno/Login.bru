@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{app_url}}/api/verify-register
+  url: {{app_url}}/api/login
   body: multipartForm
   auth: inherit
 }
@@ -15,10 +15,8 @@ headers {
 }
 
 body:multipart-form {
-  email: contoh@contoh.contoh
-  otp: 168418
+  phone_email: contoh@contoh.contoh
   password: 123456
-  password_confirmation: 123456
 }
 
 settings {
