@@ -56,4 +56,27 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function getApiResponseAttribute()
+    {
+        return [
+            'username' => $this->username,
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'store_name' => $this->store_name,
+            'gender' => $this->gender,
+            'birth_date' => $this->birth_date,
+            'photo_url' => $this->photo_url,
+        ];
+    }
+
+    public function getPhotoUrlAttribute()
+    {
+        if(is_null($this->photo)) {
+            return null;
+        }
+
+        return asset('storage/' . $this->photo);
+    }
 }
