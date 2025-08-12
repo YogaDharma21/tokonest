@@ -17,5 +17,5 @@ class Address extends Model
         'detail_address',
         'address_note',
         'type',
-    ];
+    ]; 
 }

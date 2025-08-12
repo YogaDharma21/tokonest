@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Address\Address;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -78,5 +80,10 @@ class User extends Authenticatable
         }
 
         return asset('storage/' . $this->photo);
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
     }
 }
