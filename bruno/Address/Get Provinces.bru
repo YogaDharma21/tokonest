@@ -1,0 +1,20 @@
+meta {
+  name: Get Provinces
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{app_url}}/api/province
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{token}}
+}
+
+settings {
+  encodeUrl: true
+}
