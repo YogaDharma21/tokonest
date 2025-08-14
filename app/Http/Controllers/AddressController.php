@@ -40,6 +40,8 @@ class AddressController extends Controller
 
         $address = auth()->user()->addresses()->create($this->prepareData());
 
+        $address->refresh();
+
         return $this->show($address->uuid);
     }
 
@@ -48,10 +50,10 @@ class AddressController extends Controller
      */
     public function show(string $uuid)
     {
-        $addresses = auth()->user()->addresses()->where('uuid', $uuid)->firstOrFail();
+        $address = auth()->user()->addresses()->where('uuid', $uuid)->firstOrFail();
 
         return ResponseFormatter::success(
-            $addresses->api_response,
+            $address->api_response,
         );
     }
 
@@ -70,7 +72,7 @@ class AddressController extends Controller
         }
 
         $address = auth()->user()->addresses()->where('uuid', $uuid)->firstOrFail();
-
+        $address->refresh();
         $address->update($this->prepareData());
 
         return $this->show($address->uuid);
@@ -90,10 +92,27 @@ class AddressController extends Controller
         ]);
     }
 
+    public function setDefault(string $uuid)
+    {
+        $address = auth()->user()->addresses()->where('uuid', $uuid)->firstOrFail();
+
+        $address->update([
+            'is_default' => true
+        ]);
+
+        auth()->user()->addresses()->where('id', '!=', $address->id)->update([
+            'is_default' => false
+        ]);
+
+        return ResponseFormatter::success([
+            'is_success' => true,
+        ]);
+    }
+
     protected function getValidation()
     {
         return [
-            'is_default' => 'required|int:1,0',
+            'is_default' => 'required|in:1,0',
             'receiver_name' => 'required|min:2|max:30',
             'receiver_phone' => 'required|min:2|max:30',
             'city_uuid' => 'required|exists:cities,uuid',
@@ -119,7 +138,13 @@ class AddressController extends Controller
             'type',
         ]);
 
-        $payload['city_id'] = City::where('uuid', $payload['city_uuid']);
+        $payload['city_id'] = City::where('uuid', $payload['city_uuid'])->firstOrFail()->id;
+
+        if ($payload['is_default'] == 1) {
+            auth()->user()->addresses()->update([
+                'is_default' => false
+            ]);
+        }
 
         return $payload;
     }
