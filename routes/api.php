@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/google-auth', [AuthenticationController::class, 'authGoogle']);
 Route::post('/register', [AuthenticationController::class, 'register']);
 Route::post('/resend-otp', [AuthenticationController::class, 'resendOtp']);
 Route::post('/check-otp-register', [AuthenticationController::class, 'verifyOtp']);
