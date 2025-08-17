@@ -30,7 +30,7 @@ class Category extends Model
             'slug' => $this->slug,
             'name' => $this->name,
             'icon' => asset($this->icon),
-            'childs'=>$this->childs->pluck('api_response_child'),
+            'childs' => $this->childs->pluck('api_response_child'),
             'description' => $this->description
         ];
     }
@@ -41,6 +41,16 @@ class Category extends Model
             'slug' => $this->slug,
             'name' => $this->name,
             'description' => $this->description
+        ];
+    }
+
+    public function getApiResponseWithParentAttribute()
+    {
+        return [
+            'slug' => $this->slug,
+            'name' => $this->name,
+            'description' => $this->description,
+            'parent' => optional($this->parent)->api_response_child
         ];
     }
 }

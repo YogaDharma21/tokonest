@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Address\Address;
+use App\Models\Product\Review;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -73,9 +74,23 @@ class User extends Authenticatable
         ];
     }
 
+    public function getApiResponseAsSellerAttribute()
+    {
+        $productIds = $this->products()->pluck('id');
+        return [
+            'username' => $this->username,
+            'photo_url' => $this->photo_url,
+            'store_name' => $this->store_name,
+            'product_count' => $this->products()->count(),
+            'rating_count' => Review::whereIn('product_id', $productIds)->count(),
+            'join_date' => $this->created_at->diffForHumans(),
+            'send_from' => optional($this->address()->where('is_default', true)->first())->getApiResponseAttribute(),
+        ];
+    }
+
     public function getPhotoUrlAttribute()
     {
-        if(is_null($this->photo)) {
+        if (is_null($this->photo)) {
             return null;
         }
 
