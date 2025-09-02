@@ -16,8 +16,7 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-            DB::transaction(function(){
-
+        DB::transaction(function () {
             for ($productCount = 1; $productCount <= 100; $productCount++) {
                 $payload = [
                     'name' => 'Produk ' . $productCount,
