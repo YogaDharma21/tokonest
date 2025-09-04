@@ -1,0 +1,32 @@
+meta {
+  name: Update Profile
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{app_url}}/api/profile
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  name: contoh
+  email: contoh@aja.com
+  photo: @file(C:\Users\YogaDharma\Pictures\4bc0f6607c4d1a9c052230e79d725b54.jpg)
+  username: contoh aja
+  phone: 088437623476
+  store_name: yoga store
+  gender: laki-laki
+  birth_date: 2006-07-10
+  _method: PATCH
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,0 +1,20 @@
+meta {
+  name: Delete Address
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{app_url}}/api/address/411385ff-78c8-11f0-b516-344ee8a47d87
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+settings {
+  encodeUrl: true
+}

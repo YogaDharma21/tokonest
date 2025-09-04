@@ -1,0 +1,23 @@
+meta {
+  name: Detail Product
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{app_url}}/api/product?category=minuman
+  body: multipartForm
+  auth: inherit
+}
+
+params:query {
+  category: minuman
+}
+
+headers {
+  Accept: application/json
+}
+
+settings {
+  encodeUrl: true
+}

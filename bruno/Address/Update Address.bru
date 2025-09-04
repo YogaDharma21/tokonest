@@ -1,0 +1,33 @@
+meta {
+  name: Update Address
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{app_url}}/api/address/411385ff-78c8-11f0-b516-344ee8a47d87
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  is_default: 1
+  receiver_name: yoga dharmaa
+  receiver_phone: 085792101223
+  city_uuid: ee8e8940-78fe-11ef-bd77-9e4478916c69
+  district: entah
+  postal_code: 123422
+  detail_address: Jl mekar no 2
+  address_note: deket mcd
+  type: home
+  _method: PATCH
+}
+
+settings {
+  encodeUrl: true
+}

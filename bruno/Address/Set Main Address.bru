@@ -1,0 +1,20 @@
+meta {
+  name: Set Main Address
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{app_url}}/api/address/12cbea45-78cd-11f0-b516-344ee8a47d87/set-default
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+settings {
+  encodeUrl: true
+}

@@ -46,11 +46,13 @@ class HomeController extends Controller
             return $product->api_response_excerpt;
         }));
     }
+
     public function getProductDetail(string $slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();
         return ResponseFormatter::success($product->api_response);
     }
+
     public function getProductReview(string $slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();
