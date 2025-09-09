@@ -32,7 +32,7 @@ class HomeController extends Controller
         }
 
         if (!is_null(request()->seller)) {
-            $seller = Category::where('username', request()->seller)->firstOrFail();
+            $seller = User::where('username', request()->seller)->firstOrFail();
             $products->where('seller_id', $seller->id);
         }
 
