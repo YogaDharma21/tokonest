@@ -1,0 +1,23 @@
+meta {
+  name: List Review Product
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{app_url}}/api/product/produk-100/review?per_page=1&page=1&rating=3&with_attachment=1&with_description=1
+  body: multipartForm
+  auth: inherit
+}
+
+params:query {
+  per_page: 1
+  page: 1
+  rating: 3
+  with_attachment: 1
+  with_description: 1
+}
+
+headers {
+  Accept: application/json
+}

@@ -22,6 +22,7 @@ class HomeController extends Controller
         $categories = Category::whereNull('parent_id')->with(['childs'])->get();
         return ResponseFormatter::success($categories->pluck('api-response'));
     }
+
     public function getProduct()
     {
         $products = Product::orderBy('id', 'desc');
@@ -63,7 +64,7 @@ class HomeController extends Controller
         }
 
         if (!is_null(request()->with_attachment)) {
-            $reviews = $reviews->whereNotNull('attachment');
+            $reviews = $reviews->whereNotNull('attachments');
         }
 
         if (!is_null(request()->with_description)) {
