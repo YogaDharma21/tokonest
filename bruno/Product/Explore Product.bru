@@ -5,15 +5,21 @@ meta {
 }
 
 get {
-  url: {{app_url}}/api/product?category=minuman&seller=yoga&search=9
+  url: {{app_url}}/api/product?categories[]=microwave&categories[]=tv&categories[]=kemeja
   body: multipartForm
   auth: inherit
 }
 
 params:query {
-  category: minuman
-  seller: yoga
-  search: 9
+  categories[]: microwave
+  categories[]: tv
+  categories[]: kemeja
+  ~sorting_price: asc
+  ~category: minuman
+  ~seller: yoga
+  ~search: 9
+  ~minimum_price: 11000
+  ~maximum_price: 20000
 }
 
 headers {
