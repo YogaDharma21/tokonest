@@ -36,7 +36,7 @@ class ProfileController extends Controller
 
         $payload = $validator->validated();
 
-        if(!is_null(request()->photo)) {
+        if (!is_null(request()->photo)) {
             $payload['photo'] = request()->file('photo')->store('user-photo', 'public');
         }
 

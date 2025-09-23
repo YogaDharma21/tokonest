@@ -56,7 +56,7 @@ class AuthenticationController extends Controller
                     'social_media_id' => $userId,
                 ]);
             }
-            
+
             $token = $user->createToken(config('app.name'))->plainTextToken;
 
             return ResponseFormatter::success([
