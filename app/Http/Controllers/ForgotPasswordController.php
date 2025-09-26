@@ -150,6 +150,7 @@ class ForgotPasswordController extends Controller
                 'token' => $token
             ]);
         }
+        
         return ResponseFormatter::error(
             400,
             'Invalid OTP'

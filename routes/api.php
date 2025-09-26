@@ -35,16 +35,16 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('province', [AddressController::class, 'getProvince']);
     Route::get('city', [AddressController::class, 'getCity']);
+
+    Route::prefix('cart')->group(function () {
+        Route::get('/', [CartController::class, 'getCart']);
+        Route::post('/', [CartController::class, 'addToCart']);
+        Route::delete('/{uuid}', [CartController::class, 'removeItemFromCart']);
+        Route::patch('/{uuid}', [CartController::class, 'updateItemFromCart']);
+    });
 });
 
 Route::get('product', [HomeController::class, 'getProduct']);
 Route::get('product/{slug}', [HomeController::class, 'getProductDetail']);
 Route::get('product/{slug}/review', [HomeController::class, 'getProductReview']);
 Route::get('seller/{username}', [HomeController::class, 'getSellerDetail']);
-
-Route::prefix('cart')->group(function () {
-    Route::get('/', [CartController::class, 'getCart']);
-    Route::post('/', [CartController::class, 'addToCart']);
-    Route::delete('/{uuid}', [CartController::class, 'removeItemFromCart']);
-    Route::patch('/{uuid}', [CartController::class, 'updateItemFromCart']);
-});
