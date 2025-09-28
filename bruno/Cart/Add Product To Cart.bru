@@ -1,0 +1,24 @@
+meta {
+  name: Add Product To Cart
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{app_url}}/api/cart
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  product_uuid: 5a844d92-80a5-11f0-94df-ed16a2ecbadd
+  qty: 2
+  note: Cepetan
+  variations[0][label]: Ukuran
+  variations[0][value]: XL
+}

@@ -49,7 +49,7 @@ class CartController extends Controller
             ]
         );
     }
-    public function addCart()
+    public function addToCart()
     {
         $validator = Validator::make(request()->all(), [
             'product_uuid' => 'required|exists:products,uuid',
@@ -66,8 +66,11 @@ class CartController extends Controller
                 $validator->errors(),
             );
         }
+
         $cart = $this->getOrCreateCart();
+
         $product = Product::where('uuid', request()->product_uuid)->firstOrFail();
+
         if ($product->stock < request()->qty) {
             return ResponseFormatter::error(
                 400,
@@ -84,7 +87,7 @@ class CartController extends Controller
             );
         }
 
-        $cart->items->create([
+        $cart->items()->create([
             'product_id' => $product->id,
             'variations' => request()->variations,
             'qty' => request()->qty,
