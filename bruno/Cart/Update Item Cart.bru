@@ -1,0 +1,26 @@
+meta {
+  name: Update Item Cart
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{app_url}}/api/cart/cd6619c3-9dae-11f0-aa04-960a6f120b00
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  qty: 24
+  note: :3
+  variations[0][label]: Ukuran
+  variations[0][value]: M
+  variations[1][label]: Warna
+  variations[1][value]: Kuning
+  _method: PATCH
+}
