@@ -1,11 +1,11 @@
 meta {
-  name: Apply Voucher To Cart
+  name: Remove Voucher
   type: http
   seq: 2
 }
 
 post {
-  url: {{app_url}}/api/cart/apply-voucher
+  url: {{app_url}}/api/cart/remove-voucher
   body: multipartForm
   auth: inherit
 }
