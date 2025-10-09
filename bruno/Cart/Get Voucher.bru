@@ -1,0 +1,16 @@
+meta {
+  name: Get Voucher
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{app_url}}/api/cart/get-voucher
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
