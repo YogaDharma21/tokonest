@@ -1,1 +1,0 @@
-# Shopee Inspired E-Commerce
