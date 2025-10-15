@@ -4,12 +4,20 @@ meta {
   seq: 8
 }
 
-get {
-  url: {{app_url}}/category/Elektronik.webp
-  body: none
+post {
+  url: https://rajaongkir.komerce.id/api/v1/calculate/domestic-cost
+  body: multipartForm
   auth: inherit
 }
 
-settings {
-  encodeUrl: true
+headers {
+  key: aPkPcpNLf4c2b564d68fafb6vbslBXu6
+}
+
+body:multipart-form {
+  origin: 151 @contentType(int)
+  destination: 154 @contentType(int)
+  weight: 500 @contentType(int)
+  courier: pos
+  ~price:  @contentType(boolean)
 }

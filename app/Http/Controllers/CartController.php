@@ -34,6 +34,7 @@ class CartController extends Controller
             ]);
             $cart->refresh();
         }
+        
         if ($cart->voucher != null) {
             $voucher = $cart->voucher;
             if ($voucher->voucher_type == 'discount') {
