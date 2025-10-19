@@ -34,7 +34,7 @@ class CartController extends Controller
             ]);
             $cart->refresh();
         }
-        
+
         if ($cart->voucher != null) {
             $voucher = $cart->voucher;
             if ($voucher->voucher_type == 'discount') {
@@ -226,4 +226,30 @@ class CartController extends Controller
 
         return $this->getCart();
     }
+
+    public function updateAddress()
+    {
+        $validator = Validator::make(request()->all(), [
+            'uuid' => 'required|exists:addresses,uuid',
+        ]);
+
+        if ($validator->fails()) {
+            return ResponseFormatter::error(
+                400,
+                $validator->errors(),
+            );
+        }
+
+        $cart = $this->getOrCreateCart();
+        $cart->address_id = auth()->user()->addresses()->where('uuid', request()->uuid)->firstOrFail()->id;
+        $cart->save();
+
+        return $this->getCart();
+    }
+
+    // public function getShipping(){
+    // }
+
+    // public function updateShippingFee(){
+    // }
 }

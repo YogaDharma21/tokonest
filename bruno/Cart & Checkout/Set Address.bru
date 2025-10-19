@@ -1,0 +1,20 @@
+meta {
+  name: Remove Voucher
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{app_url}}/api/cart/update-address
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  uuid: 108fd4dc-ac91-11f0-a33f-36c1277d0087
+}
