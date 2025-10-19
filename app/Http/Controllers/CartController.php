@@ -7,6 +7,7 @@ use App\Models\Product\Product;
 use App\Models\Voucher;
 use App\ResponseFormatter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
@@ -247,8 +248,67 @@ class CartController extends Controller
         return $this->getCart();
     }
 
-    // public function getShipping(){
-    // }
+    public function getShipping()
+    {
+        $cart = $this->getOrCreateCart();
+
+        $validator = Validator::make(request()->all(), [
+            'courier' => 'required|in:jne,tiki',
+        ]);
+
+        if ($validator->fails()) {
+            return ResponseFormatter::error(
+                400,
+                $validator->errors(),
+            );
+        }
+
+        if ($cart->items->count() == 0) {
+            return ResponseFormatter::error(
+                400,
+                null,
+                ['Keranjang belanja kosong'],
+            );
+        }
+
+        $seller = $cart->items->first()->product->seller;
+        $sellerAddress = $seller->addresses()->where('is_default', true)->first();
+
+        if (is_null($sellerAddress)) {
+            return ResponseFormatter::error(
+                400,
+                null,
+                ['Penjual tidak memiliki alamat pengiriman'],
+            );
+        }
+
+        if (is_null($cart->address)) {
+            return ResponseFormatter::error(
+                400,
+                null,
+                ['Alamat tujuan belum diisi'],
+            );
+        }
+
+        $weight = $cart->items->sum(function ($item) {
+            return $item->product->weight * $item->qty;
+        });
+
+        $result = Http::asForm()
+            ->withHeaders([
+                'key' => config('services.rajaongkir.key'),
+            ])
+            ->post(config('services.rajaongkir.base_url') . '/calculate/domestic-cost', [
+                'origin' => $sellerAddress->city->external_id,
+                'destination' => $cart->address->city->external_id,
+                'weight' => $weight,
+                'courier' => request()->courier,
+            ])->object();
+
+        return ResponseFormatter::success(
+            $result
+        );
+    }
 
     // public function updateShippingFee(){
     // }
