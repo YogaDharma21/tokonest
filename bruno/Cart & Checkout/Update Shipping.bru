@@ -1,17 +1,13 @@
 meta {
-  name: Get Shipping
+  name: Update Shipping
   type: http
   seq: 2
 }
 
-get {
-  url: {{app_url}}/api/cart/shipping?courier=tiki
+post {
+  url: {{app_url}}/api/cart/update-shipping
   body: multipartForm
   auth: inherit
-}
-
-params:query {
-  courier: tiki
 }
 
 headers {
@@ -20,5 +16,6 @@ headers {
 }
 
 body:multipart-form {
+  service: REG
   ~courier: jne
 }
