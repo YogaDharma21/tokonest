@@ -5,7 +5,7 @@ meta {
 }
 
 post {
-  url: {{app_url}}/api/cart/update-shipping
+  url: {{app_url}}/api/cart/shipping-fee
   body: multipartForm
   auth: inherit
 }
@@ -16,6 +16,6 @@ headers {
 }
 
 body:multipart-form {
-  service: REG
-  ~courier: jne
+  courier: jne
+  service: JTR>200
 }

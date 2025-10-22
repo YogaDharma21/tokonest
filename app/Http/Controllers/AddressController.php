@@ -68,7 +68,27 @@ class AddressController extends Controller
             );
         }
 
-        $address = auth()->user()->addresses()->create($this->prepareData());
+        $response = \Http::asForm()
+            ->withHeaders([
+                'key' => config('services.rajaongkir.key'),
+            ])
+            ->get(config('services.rajaongkir.base_url') . '/destination/domestic-destination', [
+                'search' => request()->postal_code,
+            ]);
+
+        if ($response->object()->meta->code == "404" || !isset($response->object()->data[0])) {
+            return ResponseFormatter::error(
+                400,
+                [
+                    'Kode pos tidak ditemukan!'
+                ]
+            );
+        }
+
+        $payload = $this->prepareData();
+        $payload['rajaongkir_subdistrict_id'] = $response->object()->data[0]->id;
+
+        $address = auth()->user()->addresses()->create($payload);
 
         $address->refresh();
 
@@ -102,8 +122,28 @@ class AddressController extends Controller
         }
 
         $address = auth()->user()->addresses()->where('uuid', $uuid)->firstOrFail();
+        $response = \Http::asForm()
+            ->withHeaders([
+                'key' => config('services.rajaongkir.key'),
+            ])
+            ->get(config('services.rajaongkir.base_url') . '/destination/domestic-destination', [
+                'search' => request()->postal_code,
+            ]);
+
+        if ($response->object()->meta->code == "404" || !isset($response->object()->data[0])) {
+            return ResponseFormatter::error(
+                400,
+                [
+                    'Kode pos tidak ditemukan!'
+                ]
+            );
+        }
+        
+        $payload = $this->prepareData();
+        $payload['rajaongkir_subdistrict_id'] = $response->object()->data[0]->id;
+
+        $address->update($payload);
         $address->refresh();
-        $address->update($this->prepareData());
 
         return $this->show($address->uuid);
     }

@@ -294,7 +294,12 @@ class CartController extends Controller
             return $item->product->weight * $item->qty;
         });
 
-        $result = $this->getShippingOptions($sellerAddress->city->external_id, $cart->address->city->external_id, $weight, request()->courier);
+        $result = $this->getShippingOptions(
+            $sellerAddress->rajaongkir_subdistrict_id,
+            $cart->address->rajaongkir_subdistrict_id,
+            $weight,
+            request()->courier
+        );
 
         return ResponseFormatter::success(
             $result
@@ -348,21 +353,27 @@ class CartController extends Controller
             return $item->product->weight * $item->qty;
         });
 
-        $result = $this->getShippingOptions($sellerAddress->city->external_id, $cart->address->city->external_id, $weight, request()->courier);
+        $result = $this->getShippingOptions(
+            $sellerAddress->rajaongkir_subdistrict_id,
+            $cart->address->rajaongkir_subdistrict_id,
+            $weight,
+            request()->courier
+        );
 
-        $service = collect($result->data)->where('service', request()->service)->first();
+        $service = collect($result['cost'])->where('service', request()->service)->first();
 
-        if(is_null($service)) {
+        if (is_null($service)) {
             return ResponseFormatter::error(
                 400,
                 null,
                 ['Service tidak ditemukan'],
             );
         }
+
         $cart->courier = request()->courier;
         $cart->courier_type = request()->service;
-        $cart->courier_estimation = $service->etd;
-        $cart->courier_price = $service->cost;
+        $cart->courier_estimation = $service['etd'];
+        $cart->courier_price = $service['value'];
         $cart->save();
 
         return $this->getCart();
@@ -370,7 +381,7 @@ class CartController extends Controller
 
     private function getShippingOptions(int $origin, int $destination, int $weight, string $courier)
     {
-        $result = Http::asForm()
+        $response = Http::asForm()
             ->withHeaders([
                 'key' => config('services.rajaongkir.key'),
             ])
@@ -379,8 +390,18 @@ class CartController extends Controller
                 'destination' => $destination,
                 'weight' => $weight,
                 'courier' => $courier,
-            ])->object();
+            ]);
 
+        $result['service'] = $response->object()->data[0]->name;
+        
+        foreach ($response->object()->data as $item) {
+            $result['cost'][] = [
+                'service' => $item->service,
+                'description' => $item->description,
+                'etd' => $item->etd,
+                'value' => $item->cost,
+            ];
+        }
         return $result;
     }
 }

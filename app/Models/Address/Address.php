@@ -16,6 +16,7 @@ class Address extends Model
         'postal_code',
         'detail_address',
         'address_note',
+        'rajaongkir_subdistrict_id',
         'type',
     ];
 
