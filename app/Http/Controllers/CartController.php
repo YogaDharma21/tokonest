@@ -391,9 +391,9 @@ class CartController extends Controller
                 'weight' => $weight,
                 'courier' => $courier,
             ]);
-
+ 
         $result['service'] = $response->object()->data[0]->name;
-        
+
         foreach ($response->object()->data as $item) {
             $result['cost'][] = [
                 'service' => $item->service,
