@@ -189,7 +189,7 @@ class Order extends Model
                 'bank' => 'bni',
             ];
         }
-
+                
         $response = \Midtrans\CoreApi::charge($params);
 
         $this->update([
