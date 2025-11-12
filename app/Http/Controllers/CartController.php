@@ -391,7 +391,7 @@ class CartController extends Controller
                 'weight' => $weight,
                 'courier' => $courier,
             ]);
- 
+
         $result['service'] = $response->object()->data[0]->name;
 
         foreach ($response->object()->data as $item) {
@@ -403,5 +403,82 @@ class CartController extends Controller
             ];
         }
         return $result;
+    }
+
+    public function checkout(){
+        $validator = Validator::make(request()->all(), [
+            'payment_method' => 'required|in:qris,bni_va',
+        ]);
+
+        if ($validator->fails()) {
+            return ResponseFormatter::error(
+                400,
+                $validator->errors(),
+            );
+        }
+
+        $cart = $this->getOrCreateCart();
+        if($cart->items->count() == 0){
+            return ResponseFormatter::error(
+                400,
+                ['Keranjang belanja anda kosong'],
+            );
+        }
+
+        if(is_null($cart->courier)){
+            return ResponseFormatter::error(
+                400,
+                ['Anda belum memilih kurir'],
+            );
+        }
+
+        $order = \DB::transaction(function () use ($cart) {
+            $order = auth()->user()->orders()->create([
+                'seller_id' => $cart->items->first()->product->seller_id,
+                'address_id' => $cart->address_id,
+                'courier' => $cart->courier,
+                'courier_type' => $cart->courier_type,
+                'courier_estimation' => $cart->courier_estimation,
+                'courier_price' => $cart->courier_price,
+                'voucher_id' => $cart->voucher_id,
+                'voucher_value' => $cart->voucher_value,
+                'voucher_cashback' => $cart->voucher_cashback,
+                'service_fee' => $cart->service_fee,
+                'total' => $cart->total,
+                'pay_with_coin' => $cart->pay_with_coin,
+                'payment_method' => request()->payment_method,
+                'total_payment' => $cart->total_payment,
+                'is_paid' => false,
+            ]);
+
+            foreach ($cart->items as $item) {
+                $order->items()->create([
+                    'product_id' => $item->product_id,
+                    'variations' => $item->variations,
+                    'qty' => $item->qty,
+                    'note' => $item->note,
+                ]);
+            }
+
+            $order->status()->create([
+                'status' => 'pending_payment',
+                'description' => 'Silahkan selesaikan pembayaran Anda'
+            ]);
+
+            if ($order->pay_with_coin > 0) {
+                $order->user->withdraw($order->pay_with_coin, [
+                    'description' => 'Pembayaran pesanan ' . $order->invoice_number
+                ]);
+            }
+
+            $order->refresh();
+            $order->generatePayment();
+
+            $cart->items()->delete();
+            $cart->delete();
+
+            return $order;
+        });
+        return ResponseFormatter::success($order->api_response);
     }
 }
