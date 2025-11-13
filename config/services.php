@@ -36,6 +36,9 @@ return [
         'base_url'=> 'https://rajaongkir.komerce.id/api/v1',
         'key' => env('RAJAONGKIR_KEY'),
     ],
+    'midtrans'=>[
+        'server_key'=>env('MIDTRANS_SERVER_KEY')
+    ],
 
     'slack' => [
         'notifications' => [

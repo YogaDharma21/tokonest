@@ -479,6 +479,6 @@ class CartController extends Controller
 
             return $order;
         });
-        return ResponseFormatter::success($order->api_response);
+        return ResponseFormatter::success($order->api_response_detail);
     }
 }
