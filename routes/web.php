@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MidtransController;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
@@ -11,3 +12,4 @@ Route::get('/', function () {
     ]);
 });
 
+Route::post('/midtrans/callback', [MidtransController::class, 'callback']);
