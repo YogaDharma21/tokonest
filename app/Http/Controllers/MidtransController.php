@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class MidtransController extends Controller
 {
-    public function callback()
+public function callback()
     {
         \Midtrans\Config::$serverKey = config('services.midtrans.server_key');
         \Midtrans\Config::$isProduction = config('app.env') == 'production';
@@ -18,7 +18,6 @@ class MidtransController extends Controller
         $order = \App\Models\Order\Order::where('uuid', $orderId)->firstOrFail();
 
         if ($transaction == 'capture' || $transaction == 'settlement') {
-
             \DB::transaction(function () use ($order) {
                 $order->status()->create([
                     'status' => 'paid',
@@ -34,7 +33,7 @@ class MidtransController extends Controller
                     $item->product->decrement('stock', $item->qty);
                 }
 
-                \Mail::to($order->seller->email)->send(new \App\Mail\NewOrderToSeller($order));
+                // \Mail::to($order->seller->email)->send(new \App\Mail\NewOrderToSeller($order));
             });
 
         } elseif ($transaction == 'cancel' || $transaction == 'deny') {

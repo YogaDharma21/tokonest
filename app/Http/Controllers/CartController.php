@@ -50,6 +50,7 @@ class CartController extends Controller
                 }
             }
         }
+
         $cart->total = ($cart->items->sum('total')) + $cart->courier_price + $cart->service_fee - $cart->voucher_value;
 
         if ($cart->total < 0) {
@@ -405,7 +406,8 @@ class CartController extends Controller
         return $result;
     }
 
-    public function checkout(){
+    public function checkout()
+    {
         $validator = Validator::make(request()->all(), [
             'payment_method' => 'required|in:qris,bni_va',
         ]);
@@ -418,14 +420,14 @@ class CartController extends Controller
         }
 
         $cart = $this->getOrCreateCart();
-        if($cart->items->count() == 0){
+        if ($cart->items->count() == 0) {
             return ResponseFormatter::error(
                 400,
                 ['Keranjang belanja anda kosong'],
             );
         }
 
-        if(is_null($cart->courier)){
+        if (is_null($cart->courier)) {
             return ResponseFormatter::error(
                 400,
                 ['Anda belum memilih kurir'],
@@ -480,5 +482,22 @@ class CartController extends Controller
             return $order;
         });
         return ResponseFormatter::success($order->api_response_detail);
+    }
+
+    public function toggleCoin()
+    {
+        $cart = $this->getOrCreateCart();
+
+        $coin = 0;
+        if (request()->use == 1) {
+            $balance = auth()->user()->balance;
+            $maxCoin = $cart->items->sum('total') * 0.1;
+            $coin = $balance > $maxCoin ? $maxCoin : $balance;
+        }
+
+        $cart->pay_with_coin = $coin;
+        $cart->save();
+
+        return $this->getCart();
     }
 }

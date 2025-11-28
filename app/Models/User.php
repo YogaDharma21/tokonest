@@ -8,15 +8,17 @@ use App\Models\Address\Address;
 use App\Models\Order\Order;
 use App\Models\Product\Product;
 use App\Models\Product\Review;
+use Bavix\Wallet\Interfaces\Wallet;
+use Bavix\Wallet\Traits\HasWallet;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Wallet
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens, HasWallet;
 
     /**
      * The attributes that are mass assignable.
@@ -73,6 +75,7 @@ class User extends Authenticatable
             'gender' => $this->gender,
             'birth_date' => $this->birth_date,
             'photo_url' => $this->photo_url,
+            'balance' => (float) $this->balance,
         ];
     }
 
