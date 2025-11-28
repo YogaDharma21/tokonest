@@ -1,5 +1,9 @@
-Hi {{ $user->name }}<br>
+@extends('mails.layout')
 
-Anda akan melakukan reset password, masukan OTP berikut kepada aplikasi : {{ $otp }}<br>
+@section('content')
+    Hi {{ $user->name }},<br>
 
-Abaikan jika anda tidak melakukan reset password
+    Anda akan melakukan reset password, masukan OTP berikut pada aplikasi: {{ $otp }}.<br>
+
+    Abaikan jika Anda tidak melakukan reset password.
+@endsection

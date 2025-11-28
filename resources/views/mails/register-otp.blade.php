@@ -1,3 +1,7 @@
-Hi {{ $user->name }}<br>
+@extends('mails.layout')
 
-Ini adalah OTP Register anda : {{ $user->otp_register }}
+@section('content')
+    Hi {{ $user->name }},<br>
+
+    Ini adalah OTP Register Anda: {{ $user->otp_register }}
+@endsection

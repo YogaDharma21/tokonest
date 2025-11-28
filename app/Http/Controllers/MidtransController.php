@@ -33,7 +33,7 @@ public function callback()
                     $item->product->decrement('stock', $item->qty);
                 }
 
-                // \Mail::to($order->seller->email)->send(new \App\Mail\NewOrderToSeller($order));
+                \Mail::to($order->seller->email)->send(new \App\Mail\NewOrderToSeller($order));
             });
 
         } elseif ($transaction == 'cancel' || $transaction == 'deny') {
