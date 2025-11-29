@@ -13,9 +13,4 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/testing', function () {
-    $order = \App\Models\Order\Order::orderBy('id', 'desc')->first();
-    return new NewOrderToSeller($order);
-});
-
 Route::post('/midtrans/callback', [MidtransController::class, 'callback']);
