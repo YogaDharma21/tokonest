@@ -1,11 +1,11 @@
 meta {
-  name: Get Voucher
+  name: Order History
   type: http
-  seq: 5
+  seq: 13
 }
 
 get {
-  url: {{app_url}}/api/cart/get-voucher
+  url: {{app_url}}/api/order
   body: multipartForm
   auth: inherit
 }
