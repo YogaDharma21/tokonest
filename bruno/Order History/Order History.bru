@@ -5,9 +5,16 @@ meta {
 }
 
 get {
-  url: {{app_url}}/api/order
+  url: {{app_url}}/api/order?page=1&per_page=5&last_status=paid&search=Produk 100
   body: multipartForm
   auth: inherit
+}
+
+params:query {
+  page: 1
+  per_page: 5
+  last_status: paid
+  search: Produk 100
 }
 
 headers {

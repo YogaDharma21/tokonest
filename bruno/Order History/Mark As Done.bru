@@ -1,0 +1,16 @@
+meta {
+  name: Mark As Done
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{app_url}}/api/order/5fba6c95-ce6a-11f0-84bf-90ce56465cfa/mark-done
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}

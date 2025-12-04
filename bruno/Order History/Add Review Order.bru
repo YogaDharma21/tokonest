@@ -1,0 +1,26 @@
+meta {
+  name: Add Review Order
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{app_url}}/api/order/review/add
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  order_item_uuid: 5fc1d6dc-ce6a-11f0-84bf-90ce56465cfa
+  star_seller: 4
+  star_courier: 5
+  description: Sesuai gamabar
+  attachments[]: @file(C:\Users\YogaDharma\Pictures\Screenshots\Screenshot 2025-11-18 203729.png)
+  attachments[]: @file(C:\Users\YogaDharma\Pictures\Screenshots\Screenshot 2025-11-18 203030.png)
+  show_username: 1
+}

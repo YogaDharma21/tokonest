@@ -127,7 +127,6 @@ class OrderController extends Controller
                 'show_username' => request()->show_username,
             ]);
 
-            // Add coin to buyer
             $coin = 25000;
             auth()->user()->deposit($coin, [
                 'description' => 'Review produk ' . $orderItem->product->name

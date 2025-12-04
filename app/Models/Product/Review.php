@@ -40,7 +40,6 @@ class Review extends Model
 
     public function getAttachmentsAttribute($value)
     {
-        // add storage path to each attachment
         $attachments = json_decode($value);
         $attachments = array_map(function ($attachment) {
             return asset('storage/' . $attachment);
@@ -49,7 +48,6 @@ class Review extends Model
         return $attachments;
     }
 
-    // Get API response
     public function getApiResponseAttribute()
     {
         return [
