@@ -1,0 +1,21 @@
+meta {
+  name: List Product
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{app_url}}/api/seller-dashboard/product?search&category=handphone
+  body: multipartForm
+  auth: inherit
+}
+
+params:query {
+  search: 
+  category: handphone
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}

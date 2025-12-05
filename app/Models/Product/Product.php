@@ -95,7 +95,7 @@ class Product extends Model
 
     public function getSaleCountAttribute()
     {
-        // return \App\Models\Order\OrderItem::where('product_id', $this->id)->count();
+        return OrderItem::where('product_id', $this->id)->count();
     }
 
     public function getApiResponseExcerptAttribute()

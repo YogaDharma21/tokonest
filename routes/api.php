@@ -26,6 +26,11 @@ Route::post('/login', [AuthenticationController::class, 'login']);
 Route::get('/slider', [HomeController::class, 'getSlider']);
 Route::get('/category', [HomeController::class, 'getCategory']);
 
+Route::get('product', [HomeController::class, 'getProduct']);
+Route::get('product/{slug}', [HomeController::class, 'getProductDetail']);
+Route::get('product/{slug}/review', [HomeController::class, 'getProductReview']);
+Route::get('seller/{username}', [HomeController::class, 'getSellerDetail']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'getProfile']);
     Route::patch('/profile', [ProfileController::class, 'updateProfile']);
@@ -60,9 +65,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/review/add', [OrderController::class, 'addReview']);
         Route::post('/{uuid}/mark-done', [OrderController::class, 'markAsDone']);
     });
-});
 
-Route::get('product', [HomeController::class, 'getProduct']);
-Route::get('product/{slug}', [HomeController::class, 'getProductDetail']);
-Route::get('product/{slug}/review', [HomeController::class, 'getProductReview']);
-Route::get('seller/{username}', [HomeController::class, 'getSellerDetail']);
+    Route::prefix('seller-dashboard')->group(function () {
+        Route::apiResource('product', \App\Http\Controllers\Seller\ProductController::class)->except([
+            'show'
+        ]);
+    });
+});
