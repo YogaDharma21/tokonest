@@ -1,11 +1,11 @@
 meta {
   name: TEST
   type: http
-  seq: 8
+  seq: 11
 }
 
-post {
-  url: https://rajaongkir.komerce.id/api/v1/calculate/domestic-cost
+get {
+  url: http://localhost:8000/
   body: multipartForm
   auth: inherit
 }
@@ -15,9 +15,9 @@ headers {
 }
 
 body:multipart-form {
-  origin: 73338 @contentType(int)
-  destination: 17486 @contentType(int)
-  weight: 500 @contentType(int)
-  courier: jne
+  ~origin: 73338 @contentType(int)
+  ~destination: 17486 @contentType(int)
+  ~weight: 500 @contentType(int)
+  ~courier: jne
   ~price:  @contentType(boolean)
 }
