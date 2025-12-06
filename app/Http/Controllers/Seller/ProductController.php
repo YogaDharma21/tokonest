@@ -108,9 +108,14 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $uuid)
     {
-        //
+        $product = auth()->user()->products()->where('uuid', $uuid)->firstOrFail();
+        $product->delete();
+
+        return ResponseFormatter::success([
+            'is_deleted' => true
+        ]);
     }
 
     private function getValidation()
