@@ -88,9 +88,14 @@ class VoucherController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $uuid)
     {
-        //
+        $voucher = auth()->user()->vouchers()->where('uuid', $uuid)->firstOrFail();
+        $voucher->delete();
+
+        return ResponseFormatter::success([
+            'is_deleted' => true
+        ]);
     }
 
     public function getValidation()

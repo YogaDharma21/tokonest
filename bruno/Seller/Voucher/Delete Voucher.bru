@@ -1,0 +1,21 @@
+meta {
+  name: Delete Voucher
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{app_url}}/api/seller-dashboard/voucher/89bbe5a5-d310-11f0-9702-a4ae7e6a9ac5
+  body: multipartForm
+  auth: inherit
+}
+
+params:query {
+  ~search: 
+  ~status: 
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
