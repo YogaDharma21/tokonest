@@ -64,9 +64,25 @@ class VoucherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $uuid)
     {
-        //
+        $validator = \Validator::make($request->all(), $this->getValidation());
+
+        if ($validator->fails()) {
+            return ResponseFormatter::error(400, $validator->errors());
+        }
+
+        $check = Voucher::where('code', $request->code)->where('uuid', '!=', $uuid)->count();
+        if ($check > 0) {
+            return ResponseFormatter::error(400, null, [
+                'Kode Voucher sudah digunakan!'
+            ]);
+        }
+
+        $voucher = auth()->user()->vouchers()->where('uuid', $uuid)->firstOrFail();
+        $voucher->update($validator->validated());
+
+        return ResponseFormatter::success($voucher->api_response_seller);
     }
 
     /**

@@ -1,0 +1,34 @@
+meta {
+  name: Update Voucher
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{app_url}}/api/seller-dashboard/voucher/89bbe5a5-d310-11f0-9702-a4ae7e6a9ac5
+  body: multipartForm
+  auth: inherit
+}
+
+params:query {
+  ~search: 
+  ~status: 
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  code: TESTVCRR
+  name: Test VoucherR
+  is_public: 0
+  voucher_type: cashback
+  discount_cashback_type: fixed
+  discount_cashback_value: 11
+  discount_cashback_max: 1001
+  start_date: 2025-12-07 00:00:01
+  end_date: 2025-12-07 00:00:01
+  _method: PATCH
+}
