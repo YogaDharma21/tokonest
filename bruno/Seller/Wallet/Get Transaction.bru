@@ -1,11 +1,11 @@
 meta {
   name: Get Transaction
   type: http
-  seq: 4
+  seq: 2
 }
 
 get {
-  url: {{app_url}}/api/seller-dashboard/wallet-transaction?page&per_page&last_status&search
+  url: {{app_url}}/api/seller-dashboard/wallet-transaction?page&per_page&search
   body: multipartForm
   auth: inherit
 }
@@ -13,7 +13,6 @@ get {
 params:query {
   page: 
   per_page: 
-  last_status: 
   search: 
 }
 
