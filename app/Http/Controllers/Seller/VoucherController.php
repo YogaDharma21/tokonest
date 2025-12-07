@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Models\Voucher;
 use App\ResponseFormatter;
 use Illuminate\Http\Request;
 
@@ -37,35 +38,27 @@ class VoucherController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validator = \Validator::make($request->all(), $this->getValidation());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        if ($validator->fails()) {
+            return ResponseFormatter::error(400, $validator->errors());
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $check = Voucher::where('code', $request->code)->count();
+        if ($check > 0) {
+            return ResponseFormatter::error(400, null, [
+                'Kode Voucher sudah digunakan!'
+            ]);
+        }
+
+        $voucher = auth()->user()->vouchers()->create($validator->validated());
+        $voucher->refresh();
+
+        return ResponseFormatter::success($voucher->api_response_seller);
     }
 
     /**
@@ -82,5 +75,20 @@ class VoucherController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getValidation()
+    {
+        return [
+            'code' => 'required|min:5|max:20',
+            'name' => 'required|max:50',
+            'is_public' => 'required|in:1,0',
+            'voucher_type' => 'required|in:discount,cashback',
+            'discount_cashback_type' => 'required|in:percentage,fixed',
+            'discount_cashback_value' => 'required|numeric',
+            'discount_cashback_max' => 'nullable|numeric',
+            'start_date' => 'required|date_format:Y-m-d H:i:s',
+            'end_date' => 'required|date_format:Y-m-d H:i:s',
+        ];
     }
 }

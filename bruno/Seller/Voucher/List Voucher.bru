@@ -5,14 +5,14 @@ meta {
 }
 
 get {
-  url: {{app_url}}/api/seller-dashboard/voucher
+  url: {{app_url}}/api/seller-dashboard/voucher?search=1000&status=ongoing
   body: multipartForm
   auth: inherit
 }
 
 params:query {
-  ~search: 
-  ~status: 
+  search: 1000
+  status: ongoing
 }
 
 headers {

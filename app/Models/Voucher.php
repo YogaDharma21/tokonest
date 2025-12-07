@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Order\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,11 +36,6 @@ class Voucher extends Model
         return $this->belongsTo(User::class, 'seller_id');
     }
 
-    // public function orders()
-    // {
-    //     return $this->hasMany(Order::class);
-    // }
-
     public function scopeActive($query)
     {
         return $query->where('start_date', '<=', now())
@@ -51,15 +47,15 @@ class Voucher extends Model
         return $query->where('is_public', true);
     }
 
-    // public function orders()
-    // {
-    //     return $this->hasMany(\App\Models\Order\Order::class, 'voucher_id');
-    // }
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'voucher_id');
+    }
 
-    // public function getUsedCountAttribute()
-    // {
-    //     return $this->orders()->count();
-    // }
+    public function getUsedCountAttribute()
+    {
+        return $this->orders()->count();
+    }
 
     public function getApiResponseSellerAttribute()
     {
