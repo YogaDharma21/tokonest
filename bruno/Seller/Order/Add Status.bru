@@ -1,0 +1,21 @@
+meta {
+  name: Add Status
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{app_url}}/api/seller-dashboard/order/2931606f-cb86-11f0-9faf-933243b8d0eb/status
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  status: on_delivery
+  delivery_note: Tiba di Denpasar Bali
+}

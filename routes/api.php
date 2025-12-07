@@ -79,5 +79,7 @@ Route::middleware('auth:sanctum')->group(function () {
             'index',
             'show'
         ]);
+
+        Route::post('order/{uuid}/status', [\App\Http\Controllers\Seller\OrderController::class, 'addStatus']);
     });
 });
