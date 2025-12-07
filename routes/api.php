@@ -7,8 +7,6 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Seller\ProductController;
-use App\Http\Controllers\Seller\VoucherController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/google-auth', [AuthenticationController::class, 'authGoogle']);
@@ -69,11 +67,16 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('seller-dashboard')->group(function () {
-        Route::apiResource('product', ProductController::class)->except([
+        Route::apiResource('product', \App\Http\Controllers\Seller\ProductController::class)->except([
             'show'
         ]);
 
-        Route::apiResource('voucher', VoucherController::class)->except([
+        Route::apiResource('voucher', \App\Http\Controllers\Seller\VoucherController::class)->except([
+            'show'
+        ]);
+
+        Route::apiResource('order', \App\Http\Controllers\Seller\OrderController::class)->only([
+            'index',
             'show'
         ]);
     });
