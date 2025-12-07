@@ -7,6 +7,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Seller\WalletController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/google-auth', [AuthenticationController::class, 'authGoogle']);
@@ -81,5 +82,8 @@ Route::middleware('auth:sanctum')->group(function () {
         ]);
 
         Route::post('order/{uuid}/status', [\App\Http\Controllers\Seller\OrderController::class, 'addStatus']);
+
+        Route::get('wallet-transaction', [WalletController::class, 'index']);
+
     });
 });
