@@ -4,4 +4,8 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     modules: ["@nuxt/ui", "@nuxt/eslint", "@vueuse/nuxt"],
     css: ["~/assets/css/main.css"],
+    colorMode: {
+        preference: "light",
+        fallback: "light",
+    },
 });
