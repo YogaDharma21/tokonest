@@ -2,7 +2,31 @@
 @import "@nuxt/ui";
 
 @theme {
-    --font-sans: 'Roboto', sans-serif;
+    --font-sans: "Roboto", sans-serif;
+
+    --color-orange-50: #fdefec;
+    --color-orange-100: #fcdbd5;
+    --color-orange-200: #f8b7aa;
+    --color-orange-300: #f59380;
+    --color-orange-400: #f16f55;
+    --color-orange-500: #ee4d2d;
+    --color-orange-600: #d03111;
+    --color-orange-700: #9c240d;
+    --color-orange-800: #681808;
+    --color-orange-900: #340c04;
+    --color-orange-950: #1c0702;
+
+    --color-muted-50: #fbfbfb;
+    --color-muted-100: #efefef;
+    --color-muted-200: #dcdcdc;
+    --color-muted-300: #bdbdbd;
+    --color-muted-400: #989898;
+    --color-muted-500: #7c7c7c;
+    --color-muted-600: #656565;
+    --color-muted-700: #525252;
+    --color-muted-800: #464646;
+    --color-muted-900: #3d3d3d;
+    --color-muted-950: #292929;
 }
 
 :root {
