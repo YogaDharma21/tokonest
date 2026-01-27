@@ -1,11 +1,23 @@
 <template>
-    <div>
-        <UButton variant="link" color="white" class="p-0 text-4xl font-normal" to="/">Tokonest</UButton>
-    </div>
+    <UButton
+        variant="link"
+        :color="color"
+        :padded="false"
+        to="/"
+        class="text-4xl! font-normal! no-underline!"
+    >
+        Syopo
+    </UButton>
 </template>
 
 <script setup>
-
+defineProps({
+    color: {
+        type: String,
+        default: "white",
+        validator: (propsValue) => ["white", "orange"].includes(propsValue),
+    },
+});
 </script>
 
 <style></style>

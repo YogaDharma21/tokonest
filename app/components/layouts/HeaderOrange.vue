@@ -1,25 +1,46 @@
 <template>
-    <header class="text-white flex flex-col h-32">
-        <div class="bg-primary py-2">
-            <u-container class="flex justify-end divide-x divide-gray-50/50">
-                <u-button variant="link" color="white" class="p-0 px-3"
-                    >Daftar</u-button
-                >
-                <u-button variant="link" color="white" class="p-0 px-3"
-                    >Login</u-button
-                >
-            </u-container>
-        </div>
-        <div class="bg-linear-to-b from-primary to-[#ff6633] flex-1">
-            <u-container
-                class="flex justify-between h-full items-center gap-12"
-            >
+    <header class="text-white flex flex-col">
+        <LayoutsHeaderProfile v-if="defaultMeta.showProfile" />
+        <div class="bg-linear-to-b from-primary to-[#FF6633] flex-1 py-6">
+            <UContainer class="flex justify-between items-center gap-12 h-full">
                 <BaseLogo />
-                <LayoutsSearchBar class="flex-1" />
-                <u-button variant="link"><icon-cart /></u-button>
-            </u-container>
+                <LayoutsSearchBar
+                    v-if="defaultMeta.showSearch"
+                    class="flex-1"
+                />
+                <UButton v-if="defaultMeta.showCart" variant="link" to="/cart">
+                    <IconCart />
+                </UButton>
+            </UContainer>
         </div>
     </header>
 </template>
 
-<script setup></script>
+<script setup>
+const route = useRoute();
+
+// const meta = {
+//     showProfile: false,
+//     showSearch: false
+//     showCart: false
+// }
+
+const defaultMeta = computed(() => {
+    return {
+        showProfile:
+            route.meta?.header && "showProfile" in route.meta.header
+                ? route.meta.header.showProfile
+                : true,
+        showSearch:
+            route.meta?.header && "showSearch" in route.meta.header
+                ? route.meta.header.showSearch
+                : true,
+        showCart:
+            route.meta?.header && "showCart" in route.meta.header
+                ? route.meta.header.showCart
+                : true,
+    };
+});
+</script>
+
+<style scoped></style>
