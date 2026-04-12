@@ -215,8 +215,8 @@ const titleMeta = computed(
 
 useSeoMeta({
   title: titleMeta,
-  ogTitle: () => `${titleMeta.value} | Syopo`,
-  twitterTitle: () => `${titleMeta.value} | Syopo`,
+  ogTitle: () => `${titleMeta.value} | Tokonest`,
+  twitterTitle: () => `${titleMeta.value} | Tokonest`,
   description: titleMeta,
   ogDescription: titleMeta,
   twitterDescription: titleMeta,

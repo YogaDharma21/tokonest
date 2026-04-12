@@ -9,9 +9,9 @@
 const url = useRequestURL()
 useSeoMeta({
   description: "Tempat Belanja Online No. 1 di Asia Tengara dan Taiwan",
-  ogTitle: "Syopo - Ayo Belanja di sini",
+  ogTitle: "Tokonest - Ayo Belanja di sini",
   ogDescription: "Tempat Belanja Online No. 1 di Asia Tengara dan Taiwan",
-  twitterTitle: "Syopo - Ayo Belanja di sini",
+  twitterTitle: "Tokonest - Ayo Belanja di sini",
   ogUrl: () => url.href,
   ogImage: '/images/syopo.png',
   twitterImage: '/images/syopo.png',
@@ -21,7 +21,7 @@ useSeoMeta({
 
 useHead({
   titleTemplate: (titlePerPage) => {
-    return titlePerPage ? `${titlePerPage} | Syopo` : 'Syopo - Ayo Belanja di sini'
+    return titlePerPage ? `${titlePerPage} | Tokonest` : 'Tokonest - Ayo Belanja di sini'
   },
   htmlAttrs: {
     lang: "id",

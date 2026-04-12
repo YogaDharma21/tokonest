@@ -115,7 +115,7 @@
           <div class="flex gap-5">
             <div class="flex gap-2">
               <img src="~/assets/images/garansi.png" />
-              <p class="text-black/80 text-sm">Garansi Syopo</p>
+              <p class="text-black/80 text-sm">Garansi Tokonest</p>
             </div>
             <p class="text-black/55 text-sm">
               Dapatkan barang pesananmu atau uang kembali.
@@ -319,7 +319,7 @@ const salePrice = computed(() =>
 
 const links = computed(() => [
   {
-    label: "Syopo",
+    label: "Tokonest",
     to: "/",
   },
   {
@@ -392,8 +392,8 @@ const titleMeta = computed(
 
 useSeoMeta({
   title: titleMeta,
-  ogTitle: () => `${titleMeta.value} | Syopo`,
-  twitterTitle: () => `${titleMeta.value} | Syopo`,
+  ogTitle: () => `${titleMeta.value} | Tokonest`,
+  twitterTitle: () => `${titleMeta.value} | Tokonest`,
   ogImage: () => detailProduct.value?.images?.[0],
   twitterImage: () => detailProduct.value?.images?.[0],
   twitterCard: "summary_large_image",

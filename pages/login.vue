@@ -3,7 +3,7 @@
     <UContainer class="grid grid-cols-2 h-full py-20">
       <div class="flex justify-center items-center">
         <div class="flex flex-col gap-14 text-white text-center">
-          <h1 class="text-8xl">Syopo</h1>
+          <h1 class="text-8xl">Tokonest</h1>
           <p>Tempat Belanja Online No. 1<br />di Asia Tengara dan Taiwan</p>
         </div>
       </div>
@@ -58,7 +58,7 @@
 
           <BaseButtonGoogleSignIn />
           <p class="text-sm font-normal text-black/25 text-center mt-8">
-            Baru di Syopo?
+            Baru di Tokonest?
             <NuxtLink to="/registration" class="text-primary">Daftar</NuxtLink>
           </p>
         </UCard>

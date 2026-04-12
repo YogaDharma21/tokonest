@@ -65,7 +65,7 @@
         <p class="text-black/55">
           Nilai pesanan sebelum
           <span class="underline">{{ lastReviewDate }}</span>
-          dan dapatkan maks. 25 Koin Syopo!
+          dan dapatkan maks. 25 Koin Tokonest!
         </p>
         <UButton
           class="min-w-56 justify-center"
@@ -311,7 +311,7 @@ const priceItem = computed(() => [
     value: `Rp ${formatNumber(data.value?.voucher_cashback || 0)}`,
   },
   {
-    label: `${data.value?.pay_with_coin} Koin Syopo ditukarkan`,
+    label: `${data.value?.pay_with_coin} Koin Tokonest ditukarkan`,
     value: `Rp ${formatNumber(data.value?.pay_with_coin)}`,
   },
   {

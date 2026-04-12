@@ -1,6 +1,6 @@
 <template>
   <UButton variant="link" :color="color" :padded="false" to="/" class="logo">
-    Syopo
+    Tokonest
   </UButton>
 </template>
 

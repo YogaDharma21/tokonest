@@ -239,7 +239,7 @@
             <template #header>
                 <div class="flex justify-between gap-2">
                     <div class="flex gap-2 items-center font-normal text-lg">
-                        <IconVoucher /> Voucher Syopo
+                        <IconVoucher /> Voucher Tokonest
                     </div>
                     <UButton
                         :padded="false"
@@ -258,7 +258,7 @@
             <template #default>
                 <div class="flex gap-7 items-center">
                     <div class="flex gap-2 items-center font-normal text-lg">
-                        <IconCoin /> Koin Syopo
+                        <IconCoin /> Koin Tokonest
                     </div>
                     <p class="font-medium text-sm text-gray-400">
                         {{

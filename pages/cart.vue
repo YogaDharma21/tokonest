@@ -58,7 +58,7 @@
                         <div class="flex justify-end gap-40">
                             <div class="flex gap-1 items-center font-medium">
                                 <IconVoucher />
-                                Voucher Syopo
+                                Voucher Tokonest
                             </div>
                             <UButton
                                 variant="link"
@@ -89,7 +89,7 @@
                                         <div class="flex gap-2">
                                             <IconCoin />
                                             <span class="font-medium"
-                                                >Koin Syopo</span
+                                                >Koin Tokonest</span
                                             >
                                         </div>
                                     </template>

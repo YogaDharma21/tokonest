@@ -23,7 +23,7 @@
           </nav>
         </div>
         <div>
-          <h3>Jelajahi Syopo</h3>
+          <h3>Jelajahi Tokonest</h3>
           <nav>
             <ul>
               <li v-for="(item, index) in jelajahi" :key="`${item}-${index}`">
@@ -156,7 +156,7 @@
           </div>
         </div>
         <div>
-          <h3>Download Aplikasi Syopo</h3>
+          <h3>Download Aplikasi Tokonest</h3>
           <div class="flex gap-3">
             <img src="~/assets/images/qrcode.png" />
             <div class="flex flex-col gap-2">
@@ -168,7 +168,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-text">© Syopo 2024. Hak Cipta Dilindungi</p>
+        <p class="footer-text">© Tokonest 2024. Hak Cipta Dilindungi</p>
         <div class="flex gap-1 items-center">
           <span class="footer-text">Negara:</span>
           <div class="flex divide-x divide-black/20">
@@ -192,27 +192,27 @@
 const layananPengguna = [
   "Bantuan",
   "Metode Pembayaran",
-  "SyopoPay",
-  "Koin Syopo",
+  "TokonestPay",
+  "Koin Tokonest",
   "Lacak Pesanan Pembeli",
   "Lacak Pengiriman Penjual",
   "Gratis Ongkir",
   "Pengembalian Barang & Dana",
-  "Garansi Syopo",
+  "Garansi Tokonest",
   "Hubungi Kami",
 ];
 
 const jelajahi = [
   "Tentang Kami",
   "Karir",
-  "Kebijakan Syopo",
+  "Kebijakan Tokonest",
   "Kebijakan Privasi",
   "Blog",
-  "Syopo Mall",
+  "Tokonest Mall",
   "Seller Center",
   "Flash Sale",
   "Kontak Media",
-  "Syopo Affiliate",
+  "Tokonest Affiliate",
 ];
 
 const country = [

@@ -65,7 +65,7 @@
               Nilai produk sebelum
               <span class="underline">{{ lastReviewDate }}</span>
             </p>
-            <p class="text-primary">Nilai sekarang & dapatkan 25 Koin Syopo!</p>
+            <p class="text-primary">Nilai sekarang & dapatkan 25 Koin Tokonest!</p>
           </div>
           <UButton
             label="Nilai"
