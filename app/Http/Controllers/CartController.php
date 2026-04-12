@@ -69,7 +69,7 @@ class CartController extends Controller
         return ResponseFormatter::success(
             [
                 'cart' => $cart->api_response,
-                'item' => $cart->items->pluck('api_response')
+                'items' => $cart->items->pluck('api_response')
             ]
         );
     }
