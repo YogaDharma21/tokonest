@@ -1,0 +1,27 @@
+meta {
+  name: Explore Product
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{app_url}}/api/product?categories[]=microwave&categories[]=tv&categories[]=kemeja
+  body: multipartForm
+  auth: inherit
+}
+
+params:query {
+  categories[]: microwave
+  categories[]: tv
+  categories[]: kemeja
+  ~sorting_price: asc
+  ~category: minuman
+  ~seller: yoga
+  ~search: 9
+  ~minimum_price: 11000
+  ~maximum_price: 20000
+}
+
+headers {
+  Accept: application/json
+}

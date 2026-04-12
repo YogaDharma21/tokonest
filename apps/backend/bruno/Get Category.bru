@@ -1,0 +1,20 @@
+meta {
+  name: Get Category
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{app_url}}/api/category
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

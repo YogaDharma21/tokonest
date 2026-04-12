@@ -1,0 +1,23 @@
+meta {
+  name: Login With Google
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{app_url}}/api/google-auth
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+}
+
+body:multipart-form {
+  token: {{google_token}}
+}
+
+settings {
+  encodeUrl: true
+}

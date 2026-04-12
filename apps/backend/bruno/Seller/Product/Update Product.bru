@@ -1,0 +1,40 @@
+meta {
+  name: Update Product
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{app_url}}/api/seller-dashboard/product/7787c87a-d293-11f0-9dae-7741e1a69d1d
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{sanctum_token}}
+  ~Accept: */*
+}
+
+body:multipart-form {
+  name: HPP Samsung galaxy
+  price: 1500001
+  price_sale: 1300001
+  stock: 11
+  category_slug: jas
+  description: inii smartphone samsung
+  weight: 1001
+  length: 11
+  width: 11
+  height: 6
+  video: @file(C:\Users\YogaDharma\Videos\video.mp4)
+  images[]: @file(C:\Users\YogaDharma\Pictures\Screenshots\Screenshot 2025-11-18 203729.png)
+  images[]: @file(C:\Users\YogaDharma\Pictures\Screenshots\Screenshot 2025-11-18 203030.png)
+  old_images[]: http://localhost:8000/storage/products/images/iEQNsO15mHxTaXkugOA88WkaDnuxmPVMEMxlc6ti.png
+  variations[0][name]: Storagee
+  variations[0][values][0]: 256Gb
+  variations[0][values][1]: 512Gb
+  variations[1][name]: Warna
+  variations[1][values][0]: Goldd
+  variations[1][values][1]: Blackk
+  _method: PATCH
+}

@@ -1,0 +1,23 @@
+meta {
+  name: Resend OTP
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{app_url}}/api/forgot-password/resend-otp
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+}
+
+body:multipart-form {
+  email: contoh@contoh.contoh
+}
+
+settings {
+  encodeUrl: true
+}

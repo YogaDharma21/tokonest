@@ -1,0 +1,20 @@
+meta {
+  name: Checkout
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{app_url}}/api/cart/checkout
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  payment_method: bni_va
+}

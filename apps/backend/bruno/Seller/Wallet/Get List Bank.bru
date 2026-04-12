@@ -1,0 +1,16 @@
+meta {
+  name: Get List Bank
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{app_url}}/api/seller-dashboard/list-bank
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}

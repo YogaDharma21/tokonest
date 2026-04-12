@@ -1,0 +1,38 @@
+meta {
+  name: Add Product
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{app_url}}/api/seller-dashboard/product
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{sanctum_token}}
+  ~Accept: application/json
+}
+
+body:multipart-form {
+  name: HP Samsung galaxy
+  price: 1500000
+  price_sale: 1300000
+  stock: 10
+  category_slug: microwave
+  description: ini smartphone samsung
+  weight: 1000
+  length: 10
+  width: 10
+  height: 5
+  video: @file(C:\Users\YogaDharma\Videos\video.mp4)
+  images[]: @file(C:\Users\YogaDharma\Pictures\Screenshots\Screenshot 2025-11-18 203729.png)
+  images[]: @file(C:\Users\YogaDharma\Pictures\Screenshots\Screenshot 2025-11-18 203030.png)
+  variations[0][name]: Storage
+  variations[0][values][0]: 256GB
+  variations[0][values][1]: 512GB
+  variations[1][name]: Warna
+  variations[1][values][0]: Gold
+  variations[1][values][1]: Black
+}

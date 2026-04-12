@@ -1,0 +1,15 @@
+meta {
+  name: Detail Product
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{app_url}}/api/product/produk-100
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+}

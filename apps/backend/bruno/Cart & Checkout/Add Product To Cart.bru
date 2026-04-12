@@ -1,0 +1,24 @@
+meta {
+  name: Add Product To Cart
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{app_url}}/api/cart
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  product_uuid: 5a87fc9c-80a5-11f0-94df-ed16a2ecbadd
+  qty: 1
+  note: note test
+  variations[0][label]: Ukuran
+  variations[0][value]: L
+}

@@ -1,0 +1,22 @@
+meta {
+  name: Get Transaction
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{app_url}}/api/seller-dashboard/wallet-transaction?page&per_page&search
+  body: multipartForm
+  auth: inherit
+}
+
+params:query {
+  page: 
+  per_page: 
+  search: 
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}

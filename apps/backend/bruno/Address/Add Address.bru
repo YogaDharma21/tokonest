@@ -1,0 +1,33 @@
+meta {
+  name: Add Address
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{app_url}}/api/address
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  is_default: 1
+  receiver_name: yoga dharma
+  receiver_phone: 088888888
+  city_uuid: ee8e8940-78fe-11ef-bd77-9e4478916c69
+  district: entah
+  postal_code: 43215
+  detail_address: Jl mekar no 2
+  address_note: deket mcd
+  type: home
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,16 @@
+meta {
+  name: Delete Product
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{app_url}}/api/seller-dashboard/product/7787c87a-d293-11f0-9dae-7741e1a69d1d
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{sanctum_token}}
+  ~Accept: */*
+}

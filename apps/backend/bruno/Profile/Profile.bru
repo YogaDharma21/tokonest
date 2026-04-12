@@ -1,0 +1,16 @@
+meta {
+  name: Profile
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{app_url}}/api/profile
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}

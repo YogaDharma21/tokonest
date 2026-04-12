@@ -1,0 +1,21 @@
+meta {
+  name: List Product
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{app_url}}/api/seller-dashboard/product?search=Produk 2&category=kemeja
+  body: multipartForm
+  auth: inherit
+}
+
+params:query {
+  search: Produk 2
+  category: kemeja
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}

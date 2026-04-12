@@ -1,0 +1,23 @@
+meta {
+  name: TEST
+  type: http
+  seq: 11
+}
+
+get {
+  url: http://localhost:8000/
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  key: aPkPcpNLf4c2b564d68fafb6vbslBXu6
+}
+
+body:multipart-form {
+  ~origin: 73338 @contentType(int)
+  ~destination: 17486 @contentType(int)
+  ~weight: 500 @contentType(int)
+  ~courier: jne
+  ~price:  @contentType(boolean)
+}

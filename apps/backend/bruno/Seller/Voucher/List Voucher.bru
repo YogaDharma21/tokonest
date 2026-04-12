@@ -1,0 +1,21 @@
+meta {
+  name: List Voucher
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{app_url}}/api/seller-dashboard/voucher?search=1000&status=ongoing
+  body: multipartForm
+  auth: inherit
+}
+
+params:query {
+  search: 1000
+  status: ongoing
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}

@@ -1,0 +1,16 @@
+meta {
+  name: Order Detail
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{app_url}}/api/seller-dashboard/order/2931606f-cb86-11f0-9faf-933243b8d0eb
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}

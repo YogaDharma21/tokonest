@@ -1,0 +1,20 @@
+meta {
+  name: Remove Voucher
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{app_url}}/api/cart/remove-voucher
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  voucher_code: CASHBACK5%
+}

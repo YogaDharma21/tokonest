@@ -1,0 +1,21 @@
+meta {
+  name: Update Shipping
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{app_url}}/api/cart/shipping-fee
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  courier: jne
+  service: JTR>200
+}

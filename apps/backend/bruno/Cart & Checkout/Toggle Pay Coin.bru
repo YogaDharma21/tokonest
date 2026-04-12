@@ -1,0 +1,20 @@
+meta {
+  name: Toggle Pay Coin
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{app_url}}/api/cart/toggle-coin
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  use: 1
+}

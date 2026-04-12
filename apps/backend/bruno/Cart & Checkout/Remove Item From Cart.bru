@@ -1,0 +1,16 @@
+meta {
+  name: Remove Item From Cart
+  type: http
+  seq: 12
+}
+
+delete {
+  url: {{app_url}}/api/cart/5a9f4fa1-9c15-11f0-a92a-59155f9df4ef
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}

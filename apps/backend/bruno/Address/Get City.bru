@@ -1,0 +1,21 @@
+meta {
+  name: Get City
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{app_url}}/api/province
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

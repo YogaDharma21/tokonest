@@ -1,0 +1,52 @@
+<template>
+  <UPagination
+    v-model="page"
+    :page-count="perPage"
+    :total="total"
+    :inactive-button="{
+      variant: 'link',
+      class: 'text-black/40 hover:text-primary px-3 py-1',
+    }"
+    :active-button="{
+      class: 'px-3 py-1',
+    }"
+    :prev-button="{
+      variant: 'link',
+      class: 'text-black/40 hover:text-primary px-3 py-1',
+    }"
+    :next-button="{
+      variant: 'link',
+      class: 'text-black/40 hover:text-primary px-3 py-1',
+    }"
+    :ui="{
+      wrapper: 'space-x-4',
+      base: 'text-xl font-light',
+      default: {
+        prevButton: {
+          icon: 'i-heroicons:chevron-left',
+        },
+        nextButton: {
+          icon: 'i-heroicons:chevron-right',
+        },
+      },
+    }"
+  />
+</template>
+
+<script setup>
+const page = defineModel({
+  type: Number,
+});
+defineProps({
+  total: {
+    type: Number,
+    default: 0,
+  },
+  perPage: {
+    type: Number,
+    default: 10,
+  },
+});
+</script>
+
+<style lang="scss" scoped></style>

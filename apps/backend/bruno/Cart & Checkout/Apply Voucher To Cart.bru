@@ -1,0 +1,20 @@
+meta {
+  name: Apply Voucher To Cart
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{app_url}}/api/cart/apply-voucher
+  body: multipartForm
+  auth: inherit
+}
+
+headers {
+  Accept: application/json
+  Authorization: Bearer {{sanctum_token}}
+}
+
+body:multipart-form {
+  voucher_code: CASHBACK5%
+}
