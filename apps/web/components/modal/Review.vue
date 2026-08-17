@@ -35,6 +35,7 @@
 import useVuelidate from "@vuelidate/core";
 const session = useSession();
 const toast = useToast();
+const emit = defineEmits(["success"]);
 
 const isOpen = defineModel("open", {
   type: Boolean,
@@ -141,25 +142,41 @@ async function submitReview(item) {
   formData.append("star_seller", item.rating);
   formData.append("star_courier", item.courierRating);
   formData.append("description", item.description);
-  item.photo.forEach((item) => {
-    formData.append("attachments[]", item);
+  item.photo.forEach((photoItem) => {
+    formData.append("attachments[]", photoItem);
   });
-  item.video.forEach((item) => {
-    formData.append("attachments[]", item);
+  item.video.forEach((videoItem) => {
+    formData.append("attachments[]", videoItem);
   });
   formData.append("show_username", item.showUsername ? 1 : 0);
+
+  const token = session.token || session.tokenCookie;
+  const headers = {};
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
 
   return $fetch("/server/api/order/review/add", {
     method: "POST",
     body: formData,
-    headers: {
-      Authorization: `Bearer ${session.token}`,
-    },
+    headers,
     onResponseError({ response }) {
-      if (response._data.meta?.messages?.[0]) {
+      const meta = response?._data?.meta;
+      let msg = "";
+      if (Array.isArray(meta?.message) && meta.message.length > 0) {
+        msg = meta.message[0];
+      } else if (typeof meta?.message === "string" && meta.message) {
+        msg = meta.message;
+      } else if (Array.isArray(meta?.messages) && meta.messages.length > 0) {
+        msg = meta.messages[0];
+      } else if (response?._data?.message) {
+        msg = response._data.message;
+      }
+
+      if (msg) {
         toast.add({
           color: "red",
-          title: response._data.meta.messages[0],
+          title: msg,
         });
       }
     },

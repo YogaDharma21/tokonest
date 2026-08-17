@@ -47,8 +47,8 @@ const { data } = useApi(`/server/api/cart`, {
 });
 
 const countCart = computed(() =>
-  data.value?.data?.items?.reduce((result, current) => {
-    result += current.qty;
+  (data.value?.data?.items || []).reduce((result, current) => {
+    result += current.qty || 0;
     return result;
   }, 0)
 );

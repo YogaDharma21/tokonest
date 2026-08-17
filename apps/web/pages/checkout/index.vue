@@ -416,7 +416,6 @@ definePageMeta({
     },
     middleware: ["must-auth"],
 });
-const nuxtApp = useNuxtApp();
 const router = useRouter();
 
 const session = useSession();

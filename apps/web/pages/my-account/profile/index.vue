@@ -84,7 +84,7 @@
         >
           <URadioGroup
             v-model="temporaryProfile.gender"
-            :options="['Laki-Laki', 'Perempuan', 'Lainnya']"
+            :options="genderOptions"
             class="flex-1"
             size="lg"
             :ui="{
@@ -139,8 +139,15 @@ import { format } from "date-fns";
 const session = useSession();
 const { profile } = storeToRefs(session);
 
+const genderOptions = [
+  { label: "Laki-Laki", value: "laki-laki" },
+  { label: "Perempuan", value: "perempuan" },
+  { label: "Lainnya", value: "lainnya" },
+];
+
 const temporaryProfile = ref({
   ...JSON.parse(JSON.stringify(profile.value)),
+  gender: profile.value.gender ? profile.value.gender.toLowerCase() : "",
   birth_date: profile.value.birth_date
     ? new Date(profile.value.birth_date)
     : null,
@@ -180,11 +187,12 @@ function handleChooseFile() {
 }
 function handleUploadFile(event) {
   const file = event.target?.files?.[0];
-  const allowedExtension = [".jpeg", ".png"];
+  if (!file) return;
+  const allowedExtension = [".jpeg", ".png", ".jpg"];
   const fileExtension = file.name.split(".").pop();
 
-  if (!allowedExtension.includes(`.${fileExtension}`)) {
-    alert(`Format file tidak didukung. Silakan upload file ${props.accept}`);
+  if (!allowedExtension.includes(`.${fileExtension?.toLowerCase()}`)) {
+    alert("Format file tidak didukung. Silakan upload file .jpeg atau .png");
     return;
   }
 
@@ -207,7 +215,7 @@ async function handleSubmit() {
     email: temporaryProfile.value.email,
     username: temporaryProfile.value.username,
     store_name: temporaryProfile.value.store_name,
-    gender: temporaryProfile.value.gender,
+    gender: temporaryProfile.value.gender ? temporaryProfile.value.gender.toLowerCase() : undefined,
     birth_date: temporaryProfile.value.birth_date
       ? format(temporaryProfile.value.birth_date, "Y-MM-d")
       : undefined,

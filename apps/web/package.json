@@ -27,5 +27,8 @@
     "vue": "latest",
     "vue-router": "latest",
     "vue3-google-signin": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.10.0"
   }
 }

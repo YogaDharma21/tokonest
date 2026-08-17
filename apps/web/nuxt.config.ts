@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+const baseUrl = process.env.NUXT_BASE_URL || "http://localhost:8000";
+const imageDomain = baseUrl ? baseUrl.replace(/^https?:\/\//, "").split(":")[0] : "localhost";
+
 export default defineNuxtConfig({
     compatibilityDate: "2024-04-03",
     devtools: { enabled: true },
@@ -35,16 +38,17 @@ export default defineNuxtConfig({
         },
     },
     routeRules: {
-        "/server/**": { proxy: `${process.env.NUXT_BASE_URL}/**` },
+        "/server/**": { proxy: `${baseUrl}/**` },
         "/registration/**": { ssr: false },
         "/cart": { ssr: false },
         "/checkout/**": { ssr: false },
         "/seller/**": { ssr: false },
     },
     image: {
-        domains: [process.env.NUXT_BASE_URL?.replace(/https?:\/\//, "")],
+        domains: Array.from(new Set(["localhost", "127.0.0.1", imageDomain].filter(Boolean))),
     },
     colorMode: {
         preference: "light",
     },
 });
+

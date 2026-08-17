@@ -69,7 +69,7 @@
 
 <script setup>
 import useVuelidate from "@vuelidate/core";
-import { helpers, minValue, numeric, required } from "@vuelidate/validators";
+import { helpers, required } from "@vuelidate/validators";
 
 const emit = defineEmits(["delete"]);
 const variantName = defineModel({

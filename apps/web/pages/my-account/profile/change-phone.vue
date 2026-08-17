@@ -61,7 +61,7 @@ async function handleSubmit() {
   await execute({
     phone: form.value.phone,
     email: session.profile.email,
-    gender: session.profile.gender,
+    gender: (session.profile.gender || "laki-laki").toLowerCase(),
     name: session.profile.name,
     _method: "PATCH",
   });

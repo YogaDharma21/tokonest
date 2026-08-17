@@ -64,7 +64,7 @@ async function handleSubmit() {
   if (!isValid) return;
   await execute({
     email: form.value.email,
-    gender: session.profile.gender,
+    gender: (session.profile.gender || "laki-laki").toLowerCase(),
     name: session.profile.name,
     _method: "PATCH",
   });

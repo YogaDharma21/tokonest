@@ -129,9 +129,9 @@
                                     </div>
                                     <div
                                         v-if="
-                                            data.value?.data?.cart
+                                            data?.data?.cart
                                                 ?.voucher_cashback ||
-                                            data.value?.data?.cart
+                                            data?.data?.cart
                                                 ?.voucher_value
                                         "
                                         class="flex gap-6 text-sm font-normal justify-end"
@@ -170,7 +170,6 @@ definePageMeta({
     middleware: ["must-auth"],
 });
 const session = useSession();
-const nuxtApp = useNuxtApp();
 const openVoucher = ref(false);
 
 const useCoin = ref(false);
