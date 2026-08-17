@@ -58,7 +58,7 @@
         <SellerFormGroup
           label="Deskripsi Produk"
           required
-          :help="`${form.description.length}/3000`"
+          :help="`${form.description.length}/500`"
           :error="v$.description.$errors?.[0]?.$message"
         >
           <UTextarea v-model="form.description" size="lg" />
@@ -246,30 +246,27 @@ const form = ref({
 });
 
 const rules = computed(() => ({
-  name: { required },
-  price: { required, minValue: minValue(100) },
+  name: { required, minLength: minLength(5), maxLength: maxLength(150) },
+  price: { required, minValue: minValue(1000) },
   price_sale: {
-    minValue: minValue(100),
-    maxValue: maxValue(computed(() => form.value.price)),
+    minValue: minValue(500),
+    maxValue: maxValue(computed(() => form.value.price || 0)),
   },
   stock: {
     required,
-    minValue: minValue(1),
+    minValue: minValue(0),
   },
   category_slug: { required },
-  description: { required, maxLength: maxLength(3000) },
-  weight: { required },
-  length: { required },
-  width: { required },
-  height: { required },
+  description: { required, minLength: minLength(20), maxLength: maxLength(500) },
+  weight: { required, minValue: minValue(1) },
+  length: { required, minValue: minValue(1) },
+  width: { required, minValue: minValue(1) },
+  height: { required, minValue: minValue(1) },
   images: {
     required,
     minLength: minLength(1),
   },
-  video: {
-    required,
-    minLength: minLength(1),
-  },
+  video: {},
 }));
 
 const v$ = useVuelidate(rules, form, {

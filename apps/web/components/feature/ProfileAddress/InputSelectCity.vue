@@ -165,7 +165,7 @@ const { data: responseProvince, status: statusProvince } = useApi(
   }
 );
 
-const { data: responseCities, status: statusCities } = useApi(
+const { data: responseCities, status: statusCities, execute: fetchCities } = useApi(
   "/server/api/city",
   {
     immediate: false,
@@ -186,6 +186,7 @@ async function handleSelect(value, type, close) {
   if (type === "province") {
     form.city = null;
     tabActive.value = 1;
+    fetchCities();
   } else {
     modelCity.value = {
       uuid: form.city.uuid,

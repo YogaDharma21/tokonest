@@ -2,7 +2,7 @@ import type { UseFetchOptions } from "#app";
 
 export function useSubmit<T = unknown>(
   request: string | Ref<string>,
-  options: UseFetchOptions<T>
+  options: UseFetchOptions<T> = {}
 ) {
   const payload = ref();
   const { execute: submit, ...others } = useApi(request, {

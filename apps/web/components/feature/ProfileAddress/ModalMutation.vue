@@ -222,11 +222,16 @@ async function handleSave() {
   const isValid = await v$.value.$validate();
   if (!isValid) return;
 
-  const { city, province, is_default, ...otherForm } = form.value;
   const newData = {
-    ...otherForm,
-    is_default: is_default ? 1 : 0,
-    city_uuid: city.uuid,
+    receiver_name: form.value.receiver_name,
+    receiver_phone: form.value.receiver_phone,
+    district: form.value.district,
+    postal_code: form.value.postal_code,
+    detail_address: form.value.detail_address,
+    address_note: form.value.address_note,
+    type: form.value.type,
+    is_default: form.value.is_default ? 1 : 0,
+    city_uuid: form.value.city?.uuid,
   };
 
   if (form.value?.uuid) {

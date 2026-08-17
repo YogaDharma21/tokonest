@@ -10,8 +10,16 @@ export const useSession = defineStore("session", () => {
     birth_date: null,
     balance: 0,
   });
-  const token = ref("");
-  const tokenCookie = useCookie('access_token')
+  const tokenCookie = useCookie("access_token");
+  const token = ref(tokenCookie.value || "");
+
+  watch(tokenCookie, (newVal) => {
+    token.value = newVal || "";
+  });
+
+  watch(token, (newVal) => {
+    tokenCookie.value = newVal || undefined;
+  });
 
   const registrationForm = ref({
     email: "",

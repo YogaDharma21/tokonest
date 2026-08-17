@@ -85,7 +85,7 @@ const {
   status: statusResetPassword,
   error: errorResetPassword,
   data: dataResetPassword,
-} = useSubmit("/server/api/forgot-password/reset-password");
+} = useSubmit("/server/api/forgot-password");
 
 const { execute: getProfile, status: statusProfile } = useApi(
   "/server/api/profile",
@@ -172,7 +172,7 @@ async function handleNext(stepKey, value) {
 
       if (errorResetPassword.value) {
         formStepElement.value.setError(
-          error.value.data?.meta?.validations || {}
+          errorResetPassword.value?.data?.meta?.validations || {}
         );
         return;
       }
